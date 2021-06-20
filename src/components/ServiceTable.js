@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import moment from "moment"
 
 const ServiceTable = () => {
   const [status, setStatus] = useState([])
@@ -30,16 +31,21 @@ const ServiceTable = () => {
   }
   return (
     <div>
-      <table className="services">
+      <p data-testid="lastUpdated" className="updated">
+        Last Updated: {moment().format("MMMM Do YYYY, h:mm:ss a")}
+      </p>
+      <table className="services" data-testid="services">
         <thead>
-          <th>Line</th>
-          <th>Status</th>
-          <th></th>
+          <tr>
+            <th>Line</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
-          {status.map((line) => {
+          {status.map((line, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td>{line.name}</td>
                 <td
                   className={line.lineStatuses[0].statusSeverityDescription.trim()}
@@ -56,7 +62,9 @@ const ServiceTable = () => {
                       },
                     }}
                   >
-                    <button className="moreInfo">View More</button>
+                    <button className="moreInfo" data-testid="moreButton">
+                      View More
+                    </button>
                   </Link>
                 </td>
               </tr>

@@ -18,7 +18,11 @@ const LineInfo = ({ location }) => {
         </p>
         <h1 className="lineTitle">{name} Line</h1>
         <p className="lineInfo">{reason}</p>
-        <button className="moreInfo" onClick={handleClick}>
+        <button
+          data-testid="backButton"
+          className="moreInfo"
+          onClick={handleClick}
+        >
           Go back
         </button>
       </div>
@@ -31,7 +35,11 @@ const LineInfo = ({ location }) => {
         </p>
         <h1 className="lineTitle">{name} Line</h1>
         <p className="lineInfo">Good Service</p>
-        <button className="moreInfo" onClick={handleClick}>
+        <button
+          className="moreInfo"
+          data-testid="backButton"
+          onClick={handleClick}
+        >
           Go back
         </button>
       </div>
