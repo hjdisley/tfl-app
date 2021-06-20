@@ -6,7 +6,9 @@ const Home = () => {
   return (
     <div>
       <div className="lastUpdated">
-        <p>Last Updated: {moment().format("MMMM Do YYYY, h:mm:ss a")}</p>
+        <p className="updated">
+          Last Updated: {moment().format("MMMM Do YYYY, h:mm:ss a")}
+        </p>
       </div>
       <ServiceTable />
     </div>

@@ -1,5 +1,6 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
+import moment from "moment"
 
 const LineInfo = ({ location }) => {
   const history = useHistory()
@@ -12,17 +13,27 @@ const LineInfo = ({ location }) => {
   if (reason) {
     return (
       <div>
-        <h1>{name}</h1>
-        <p>{reason}</p>
-        <button onClick={handleClick}>Go back</button>
+        <p className="updated">
+          Last Updated: {moment().format("MMMM Do YYYY, h:mm:ss a")}
+        </p>
+        <h1 className="lineTitle">{name} Line</h1>
+        <p className="lineInfo">{reason}</p>
+        <button className="moreInfo" onClick={handleClick}>
+          Go back
+        </button>
       </div>
     )
   } else {
     return (
       <div>
-        <h1>{location.state.name}</h1>
-        <p>Good Service</p>
-        <button onClick={handleClick}>Go back</button>
+        <p className="updated">
+          Last Updated: {moment().format("MMMM Do YYYY, h:mm:ss a")}
+        </p>
+        <h1 className="lineTitle">{name} Line</h1>
+        <p className="lineInfo">Good Service</p>
+        <button className="moreInfo" onClick={handleClick}>
+          Go back
+        </button>
       </div>
     )
   }

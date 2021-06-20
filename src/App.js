@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <h1>Travel Widget</h1>
+        <h1 className="title">Travel Widget</h1>
         <Switch>
           <Route path="/travel" component={Home}></Route>
           <Route path="/:line" component={LineInfo}></Route>

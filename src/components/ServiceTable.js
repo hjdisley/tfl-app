@@ -8,7 +8,9 @@ const ServiceTable = () => {
 
   const fetchData = async () => {
     await axios("https://api.tfl.gov.uk/line/mode/tube/status")
-      .then((res) => setStatus(res.data))
+      .then((res) => {
+        setStatus(res.data)
+      })
       .catch((err) => {
         console.error(err)
       })
@@ -22,7 +24,7 @@ const ServiceTable = () => {
   if (loading) {
     return (
       <div>
-        <p>Loading...</p>
+        <p className="loading">Loading...</p>
       </div>
     )
   }
@@ -39,7 +41,11 @@ const ServiceTable = () => {
             return (
               <tr>
                 <td>{line.name}</td>
-                <td>{line.lineStatuses[0].statusSeverityDescription}</td>
+                <td
+                  className={line.lineStatuses[0].statusSeverityDescription.trim()}
+                >
+                  {line.lineStatuses[0].statusSeverityDescription}
+                </td>
                 <td>
                   <Link
                     to={{
@@ -50,7 +56,7 @@ const ServiceTable = () => {
                       },
                     }}
                   >
-                    <button>View More</button>
+                    <button className="moreInfo">View More</button>
                   </Link>
                 </td>
               </tr>
