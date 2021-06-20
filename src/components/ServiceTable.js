@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import moment from "moment"
 import axios from "axios"
 
 const ServiceTable = () => {
   const [status, setStatus] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchData = async () => {
     await axios("https://api.tfl.gov.uk/line/mode/tube/status")
@@ -16,14 +16,19 @@ const ServiceTable = () => {
 
   useEffect(() => {
     fetchData()
+    setLoading(false)
   }, [])
 
+  if (loading) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    )
+  }
   return (
     <div>
-      <div className="lastUpdated">
-        <p>Last Updated: {moment().format("MMMM Do YYYY, h:mm:ss a")}</p>
-      </div>
-      <table>
+      <table className="services">
         <thead>
           <th>Line</th>
           <th>Status</th>
@@ -36,7 +41,15 @@ const ServiceTable = () => {
                 <td>{line.name}</td>
                 <td>{line.lineStatuses[0].statusSeverityDescription}</td>
                 <td>
-                  <Link to={`/travel/${line.name}`}>
+                  <Link
+                    to={{
+                      pathname: `/${line.name}`,
+                      state: {
+                        name: line.name,
+                        reason: line.lineStatuses[0].reason,
+                      },
+                    }}
+                  >
                     <button>View More</button>
                   </Link>
                 </td>
@@ -50,13 +63,3 @@ const ServiceTable = () => {
 }
 
 export default ServiceTable
-
-{
-  /* <td>Bakerloo</td>
-<td>Good Service</td>
-<td>
-  <Link to="/travel/bakerloo">
-    <button>View More</button>
-  </Link>
-</td> */
-}
