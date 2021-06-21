@@ -55,7 +55,7 @@ const ServiceTable = () => {
                 <td>
                   <Link
                     to={{
-                      pathname: `/${line.name}`,
+                      pathname: `/travel/${line.name}`,
                       state: {
                         name: line.name,
                         reason: line.lineStatuses[0].reason,

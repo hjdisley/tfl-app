@@ -1,5 +1,10 @@
 import "./App.css"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom"
 import Home from "./components/Home"
 import LineInfo from "./components/LineInfo"
 
@@ -9,8 +14,11 @@ const App = () => {
       <div className="App">
         <h1 className="title">Travel Widget</h1>
         <Switch>
-          <Route path="/travel" component={Home}></Route>
-          <Route path="/:line" component={LineInfo}></Route>
+          <Route exact path="/">
+            <Redirect to="/travel" />
+          </Route>
+          <Route exact path="/travel" component={Home} />
+          <Route path="/travel/:line" component={LineInfo} />
         </Switch>
       </div>
     </Router>
